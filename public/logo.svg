@@ -1,0 +1,21 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradient" x1="20" y1="20" x2="108" y2="108" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#8B5CF6"></stop>
+      <stop offset="100%" stop-color="#6D28D9"></stop>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded square -->
+  <rect x="16" y="16" width="96" height="96" rx="20" fill="url(#gradient)"></rect>
+
+  <!-- Play button -->
+  <path d="M50 42L82 64L50 86V42Z" fill="white"></path>
+
+  <!-- Calendar line -->
+  <rect x="36" y="32" width="56" height="8" rx="4" fill="white" opacity="0.9"></rect>
+
+  <!-- Calendar rings -->
+  <rect x="44" y="24" width="6" height="12" rx="3" fill="white"></rect>
+  <rect x="78" y="24" width="6" height="12" rx="3" fill="white"></rect>
+</svg>
