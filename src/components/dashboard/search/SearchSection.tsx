@@ -28,10 +28,22 @@ const SearchSection = () => {
       </CardHeader>
       <CardContent>
         <Field orientation="horizontal">
-          <Input className="h-8" type="search" placeholder="" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+          <Input
+            className="h-8"
+            type="search"
+            placeholder=""
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                handleSearch();
+              }
+            }}
+          />
           <Button className="h-8" onClick={handleSearch}>Add</Button>
         </Field>
-        <div className="flex flex-row flex-wrap mt-4">
+        <div className="flex flex-row flex-wrap mt-4 gap-1">
           {selectedThemes.map((theme, index) => (
             <Badge key={index} variant="default" className="rounded-sm hover:cursor-pointer" onClick={() => handleRemoveTheme(theme)} >
               {theme}
