@@ -1,6 +1,7 @@
 import Header from "../components/common/Header";
 import Sidebar from "../components/common/Sidebar";
 import SearchSection from "../components/dashboard/search/SearchSection";
+import SettingsSection from "../components/dashboard/seetings/SettingsSection";
 
 export default function Home() {
   return (
@@ -8,8 +9,9 @@ export default function Home() {
       <Sidebar />
       <div className="flex-1 py-4 px-10 flex flex-col gap-2">
         <Header />
-        <div className="flex flex-row mt-6">
+        <div className="flex flex-row mt-6 gap-4">
           <SearchSection />
+          <SettingsSection />
         </div>
       </div>
     </div >
