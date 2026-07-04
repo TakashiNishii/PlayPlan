@@ -1,12 +1,12 @@
 "use client"
 
 import { InformationCircleIcon, XMarkIcon } from "@heroicons/react/24/outline"
-import { Badge } from "../ui/badge"
-import { Button } from "../ui/button"
-import { Card, CardAction, CardContent, CardHeader } from "../ui/card"
-import { Field } from "../ui/field"
-import { Input } from "../ui/input"
-import { useSearchContext } from "../../contexts/search-context"
+import { Badge } from "../../ui/badge"
+import { Button } from "../../ui/button"
+import { Card, CardAction, CardContent, CardHeader } from "../../ui/card"
+import { Field } from "../../ui/field"
+import { Input } from "../../ui/input"
+import { useSearchContext } from "../../../contexts/search-context"
 
 const SearchSection = () => {
   const { searchTerm, setSearchTerm, selectedThemes, setSelectedThemes } = useSearchContext();

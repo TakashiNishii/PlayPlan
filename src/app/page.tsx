@@ -1,7 +1,6 @@
-import { Suspense } from "react";
 import Header from "../components/common/Header";
 import Sidebar from "../components/common/Sidebar";
-import SearchSection from "../components/dashboard/SearchSection";
+import SearchSection from "../components/dashboard/search/SearchSection";
 
 export default function Home() {
   return (
