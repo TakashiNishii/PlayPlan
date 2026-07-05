@@ -11,9 +11,13 @@ import { Input } from "@/components/ui/input"
 const SearchCardContent = () => {
   const { searchTerm, setSearchTerm, selectedThemes, setSelectedThemes } = useSearchContext();
 
+  const limitToFiveWords = (value: string) => value.split(/\s+/).filter(Boolean).slice(0, 5).join(" ")
+
   const handleSearch = () => {
-    if (searchTerm.trim() !== "" && !selectedThemes.includes(searchTerm)) {
-      setSelectedThemes([...selectedThemes, searchTerm]);
+    const limitedSearchTerm = limitToFiveWords(searchTerm.trim())
+
+    if (limitedSearchTerm !== "" && !selectedThemes.includes(limitedSearchTerm)) {
+      setSelectedThemes([...selectedThemes, limitedSearchTerm]);
     }
     setSearchTerm("");
   }
@@ -29,7 +33,7 @@ const SearchCardContent = () => {
           type="search"
           placeholder=""
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => setSearchTerm(limitToFiveWords(e.target.value))}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               e.preventDefault();
