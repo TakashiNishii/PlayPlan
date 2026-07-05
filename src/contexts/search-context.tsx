@@ -1,3 +1,4 @@
+import { VideoInfo } from "@/types/youtube-response";
 import { createContext, useContext, useState } from "react";
 
 export type WeekdayKey = "mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun"
@@ -11,6 +12,8 @@ interface SearchContextProps {
   setSelectedThemes: (themes: string[]) => void
   dailyAvailableMinutes: DailyAvailableMinutes
   setDailyAvailableMinutes: (minutes: DailyAvailableMinutes) => void
+  videos: VideoInfo[]
+  setVideos: (videos: VideoInfo[]) => void
 }
 
 export const SearchContext = createContext<SearchContextProps | undefined>(undefined);
@@ -36,6 +39,9 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
     setDailyAvailableMinutesState(minutes)
   }
 
+  const [videos, setVideos] = useState<VideoInfo[]>([]);
+
+
   const contextValue: SearchContextProps = {
     searchTerm,
     setSearchTerm,
@@ -43,6 +49,8 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
     setSelectedThemes,
     dailyAvailableMinutes,
     setDailyAvailableMinutes,
+    videos,
+    setVideos,
   };
   return (
     <SearchContext.Provider value={contextValue}>
