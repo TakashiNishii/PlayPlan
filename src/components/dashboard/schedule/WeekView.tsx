@@ -1,6 +1,7 @@
 import { useSearchContext, WeekdayKey } from "@/contexts/search-context"
 import { VideoInfo } from "@/types/youtube-response"
 import Image from "next/image"
+import Link from "next/link"
 
 type WeekMinutesAvailable = Record<WeekdayKey, number>
 type WeekSchedule = Record<WeekdayKey, VideoInfo[]>
@@ -134,12 +135,12 @@ const WeekView = () => {
   const daysCount = scheduledDays.length
 
   return (
-    <div className="flex flex-col gap-2 h-full min-h-0 px-6 -mt-2">
+    <div className="flex flex-col gap-2  min-h-0 px-6 -mt-2">
       <p className="shrink-0 text-xs">It will take <span className="font-bold text-primary bg-primary-200">{daysCount}  day(s)</span> to watch all available videos.</p>
-      <div className="mt-2 flex-1 min-h-0 h-full overflow-x-auto">
-        <div className="flex flex-row gap-2 h-full">
+      <div className="mt-2 flex-1 min-h-0  overflow-x-auto">
+        <div className="flex flex-row gap-2">
           {scheduledDays.map((daySchedule, index) => (
-            <div key={`${daySchedule.day}-${index}`} className="flex flex-col gap-2 w-56  bg-muted items-center rounded-md p-2">
+            <div key={`${daySchedule.day}-${index}`} className="flex flex-col gap-2 w-56 bg-muted items-center rounded-md p-2">
               <h5 className="text-sm font-bold">
                 Day {index + 1}
               </h5>
@@ -148,7 +149,13 @@ const WeekView = () => {
                 <p className="text-xs text-muted-foreground">No videos scheduled.</p>
               ) : (
                 daySchedule.videos.map((video) => (
-                  <div key={video.id.videoId} className="flex flex-row items-center gap-2 bg-white p-2 rounded-md w-full h-24">
+                  <Link
+                    key={video.id.videoId}
+                    href={`https://www.youtube.com/watch?v=${video.id.videoId}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex flex-row items-center gap-2 bg-white p-2 rounded-md w-full min-w-52 h-24"
+                  >
                     <Image
                       src={video.snippet.thumbnails.high.url}
                       alt={video.snippet.title}
@@ -156,11 +163,11 @@ const WeekView = () => {
                       height={32}
                       className="w-12 h-14 object-cover"
                     />
-                    <span className="text-xs text-black" title={video.snippet.title}>
-                      {truncateText(video.snippet.title, 50)}
+                    <span className="text-xs text-black break-all" title={video.snippet.title}>
+                      {truncateText(video.snippet.title, 25)}
                     </span>
 
-                  </div>
+                  </Link>
                 ))
               )}
             </div>
