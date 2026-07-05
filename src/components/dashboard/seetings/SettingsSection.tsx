@@ -12,7 +12,7 @@ import { useQueryClient } from "@tanstack/react-query"
 import { useState } from "react"
 
 const SettingsSection = () => {
-  const { selectedThemes, setVideos } = useSearchContext()
+  const { selectedThemes, setVideos, dailyAvailableMinutes } = useSearchContext()
   const queryClient = useQueryClient()
   const [isGenerating, setIsGenerating] = useState(false)
 
@@ -41,6 +41,13 @@ const SettingsSection = () => {
     }
   }
 
+  const verifyIfAllDailyMinutesAreSet = () => {
+    if (!dailyAvailableMinutes) return false
+
+    const allDays = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"] as const
+    return allDays.every(day => dailyAvailableMinutes[day] !== "")
+  }
+
   return (
     <Card className="flex-1 justify-between shadow-md border rounded-sm py-4">
       <CardHeader>
@@ -55,7 +62,7 @@ const SettingsSection = () => {
           variant="default"
           className="px-4 py-2 h-10"
           onClick={handleGenerateSchedule}
-          disabled={selectedThemes.length === 0 || isGenerating}
+          disabled={selectedThemes.length === 0 || isGenerating || !verifyIfAllDailyMinutesAreSet()}
         >
           <CalendarDaysIcon className="w-4 h-4 mr-2" />
           {isGenerating ? "Generating..." : "Generate Schedule"}

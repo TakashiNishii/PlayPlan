@@ -20,4 +20,5 @@ export interface VideoInfo {
     channelTitle: string;
     liveBroadcastContent: string;
   };
+  duration: string;
 }
