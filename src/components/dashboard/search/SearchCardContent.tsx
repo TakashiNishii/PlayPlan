@@ -33,7 +33,7 @@ const SearchCardContent = () => {
           type="search"
           placeholder=""
           value={searchTerm}
-          onChange={(e) => setSearchTerm(limitToFiveWords(e.target.value))}
+          onChange={(e) => setSearchTerm(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               e.preventDefault();
