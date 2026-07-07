@@ -12,6 +12,8 @@ interface SearchContextProps {
   setSelectedThemes: (themes: string[]) => void
   dailyAvailableMinutes: DailyAvailableMinutes
   setDailyAvailableMinutes: (minutes: DailyAvailableMinutes) => void
+  generatedDailyAvailableMinutes: DailyAvailableMinutes | null
+  setGeneratedDailyAvailableMinutes: (minutes: DailyAvailableMinutes | null) => void
   videos: VideoInfo[]
   setVideos: (videos: VideoInfo[]) => void
 }
@@ -34,9 +36,14 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
     sat: "",
     sun: "",
   });
+  const [generatedDailyAvailableMinutes, setGeneratedDailyAvailableMinutesState] = useState<DailyAvailableMinutes | null>(null)
 
   const setDailyAvailableMinutes = (minutes: DailyAvailableMinutes) => {
     setDailyAvailableMinutesState(minutes)
+  }
+
+  const setGeneratedDailyAvailableMinutes = (minutes: DailyAvailableMinutes | null) => {
+    setGeneratedDailyAvailableMinutesState(minutes)
   }
 
   const [videos, setVideos] = useState<VideoInfo[]>([]);
@@ -49,6 +56,8 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
     setSelectedThemes,
     dailyAvailableMinutes,
     setDailyAvailableMinutes,
+    generatedDailyAvailableMinutes,
+    setGeneratedDailyAvailableMinutes,
     videos,
     setVideos,
   };

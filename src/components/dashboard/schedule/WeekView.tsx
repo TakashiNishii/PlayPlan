@@ -24,7 +24,8 @@ const truncateText = (value: string, maxLength: number) =>
   value.length > maxLength ? `${value.slice(0, maxLength)}...` : value
 
 const WeekView = () => {
-  const { videos, dailyAvailableMinutes } = useSearchContext()
+  const { videos, dailyAvailableMinutes, generatedDailyAvailableMinutes } = useSearchContext()
+  const minutesReference = generatedDailyAvailableMinutes ?? dailyAvailableMinutes
 
   const convertDurationStringToMinutes = (duration: string): number | null => {
     const durationParts = duration.split(":").map(Number)
@@ -44,7 +45,7 @@ const WeekView = () => {
 
   const buildWeekMinutesAvailable = (): WeekMinutesAvailable => {
     return ALL_DAYS.reduce((acc, day) => {
-      const parsedMinutes = Number(dailyAvailableMinutes[day])
+      const parsedMinutes = Number(minutesReference[day])
       acc[day] = Number.isFinite(parsedMinutes) ? Math.max(parsedMinutes, 0) : 0
       return acc
     }, {} as WeekMinutesAvailable)
@@ -54,7 +55,7 @@ const WeekView = () => {
     const ignoredVideos: VideoInfo[] = []
     const scheduledDays: ScheduledDay[] = []
     const pendingVideos: Array<{ video: VideoInfo; durationInMinutes: number }> = []
-    const maxDailyMinutes = Math.max(...ALL_DAYS.map((day) => Number(dailyAvailableMinutes[day]) || 0), 0)
+    const maxDailyMinutes = Math.max(...ALL_DAYS.map((day) => Number(minutesReference[day]) || 0), 0)
 
     // Pré-validação: só vai para pending o que pode ser agendado em algum dia.
     videos.forEach((video) => {

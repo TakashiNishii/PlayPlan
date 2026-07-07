@@ -12,7 +12,7 @@ import { useQueryClient } from "@tanstack/react-query"
 import { useState } from "react"
 
 const SettingsSection = () => {
-  const { selectedThemes, setVideos, dailyAvailableMinutes } = useSearchContext()
+  const { selectedThemes, setVideos, dailyAvailableMinutes, setGeneratedDailyAvailableMinutes } = useSearchContext()
   const queryClient = useQueryClient()
   const [isGenerating, setIsGenerating] = useState(false)
 
@@ -25,6 +25,8 @@ const SettingsSection = () => {
 
     try {
       const data = await queryClient.fetchQuery(searchVideosQueryOptions(selectedThemes))
+
+      setGeneratedDailyAvailableMinutes({ ...dailyAvailableMinutes })
 
       if (!data) {
         setVideos([])
